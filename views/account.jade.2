@@ -1,0 +1,38 @@
+extends layout
+ 
+block content
+  div.container
+    div.content
+
+      form(action='/user/'+user.id, method="POST")
+      label Name
+      input(id='name', type='text', name='name', value='', placeholder='@')
+      input(type='submit',value='Sign Up',data-transition='fade', data-theme='c')  
+      
+
+      h2 Edit Profile
+      form(method='post', action='/api/users/' + user.id)
+      input(name='user[id]', value=user.id, type='hidden')
+      input(name='_method', value='PUT', type='hidden')
+      
+      label Name
+      input(id='name', type='text', name='name', value='', placeholder='@')
+      input(type='submit',value='Sign Up',data-transition='fade', data-theme='c')
+
+
+
+
+      table.table.table-striped
+        thead
+          tr
+            th Table
+            th Heading
+        tbody
+          tr
+            td #{user.name}
+            td Test
+          tr
+            td #{user.provider}
+            td World
+ 
+  div.footer

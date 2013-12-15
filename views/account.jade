@@ -1,19 +1,13 @@
-!!! 5
-html
-head
- title= title
- meta(name='viewport', content='width=device-width, initial-scale=1.0')
- link(href='/css/bootstrap.min.css', rel='stylesheet', media='screen')
-body
-.container
- h1 You are logged in.
- p.lead Say something worthwhile here.
- a(href="/") Go home
- br
- a(href="/ping") Ping
- br
- br
- a(href="/logout") Logout
+extends layout
+ 
+block content
+  div.container
+    div.content
 
-script(src='http://code.jquery.com/jquery.js')
-script(src='js/bootstrap.min.js')
+  form(action='/api/users/'+user.id,method='post')
+    div(data-role='fieldcontain')
+      fieldset(data-role='controlgroup')
+        label(for='name') name 
+           input(id='name',type='text',value='user.name',placeholder=user.name,name='name')
+    div(data-role='fieldcontain')   
+      input(type='submit',value='Update',data-transition='fade', data-theme='c')

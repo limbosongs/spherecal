@@ -32,6 +32,7 @@ passport.serializeUser(function(user, done) {
  console.log('serializeUser: ' + user._id)
  done(null, user._id);
 });
+
 passport.deserializeUser(function(id, done) {
  User.findById(id, function(err, user){
      console.log(user)
@@ -43,39 +44,75 @@ passport.deserializeUser(function(id, done) {
 // routes
 app.get('/', routes.index);
 
-app.get('/ping', routes.ping);
-
-app.get('/account', ensureAuthenticated, function(req, res){
-User.findById(req.session.passport.user, function(err, user) {
- if(err) {
-   console.log(err);
- } else {
-   res.render('account', { user: user});
- };
-});
+app.post('/myaction', function(req, res) {
+  console.log('You sent the name "' + req.body.name + '".');
 });
 
-app.get('/', routes.index);
-app.get('/ping', routes.ping);
-app.get('/account', ensureAuthenticated, function(req, res){
-res.render('account', { user: req.user });
+app.get('/api/users', function (req, res){
+  return User.find(function (err, users) {
+    if (!err) {
+       return res.send(users);
+    } else {
+       return console.log(err);
+    }
+  });
 });
+
+app.get('/api/users/:id', function(req, res){
+  return User.findById(req.params.id, function(err, user){
+    if (!err) {
+	return res.send(user);
+    } else {
+	return console.log(err);
+    }
+  });
+});
+
+/*app.post('/api/users/:id', function(req, res){
+   console.log(req);
+   return(res);  
+
+});
+*/
+app.post('/api/users/:id', function (req, res){
+  return User.findById(req.params.id, function (err, user) {
+    user.name= req.body.name;
+    return user.save(function (err) {
+      if (!err) {
+        console.log("updated");
+      } else {
+        console.log(err);
+      }
+      return res.send(user);
+    });
+  });
+});
+
+app.get('/account', ensureAuthenticated, function(req, res){
+	res.render('account', { user: req.user });
+});
+
 app.get('/auth/facebook',
 passport.authenticate('facebook'),
-function(req, res){
+	function(req, res){
 });
+
 app.get('/auth/facebook/callback',
 passport.authenticate('facebook', { failureRedirect: '/' }),
-function(req, res) {
- res.redirect('/account');
+	function(req, res) {
+ 		res.redirect('/account');
 });
-
-
 
 app.get('/logout', function(req, res){
-req.logout();
-res.redirect('/');
+	req.logout();
+	res.redirect('/');
 });
+
+app.post('/signup', function(req, res){
+	console.log(req.body);	
+	res.redirect('/account');
+});
+
 
 // port
 app.listen(1337);
@@ -83,6 +120,6 @@ app.listen(1337);
 // test authentication
 function ensureAuthenticated(req, res, next) {
 if (req.isAuthenticated()) { return next(); }
-res.redirect('/')
+	res.redirect('/')
 }
 
