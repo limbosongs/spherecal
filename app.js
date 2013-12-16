@@ -61,9 +61,9 @@ app.get('/api/users', function (req, res){
 app.get('/api/users/:id', function(req, res){
   return User.findById(req.params.id, function(err, user){
     if (!err) {
-	return res.send(user);
+        return res.send(user);
     } else {
-	return console.log(err);
+        return console.log(err);
     }
   });
 });
@@ -89,28 +89,28 @@ app.post('/api/users/:id', function (req, res){
 });
 
 app.get('/account', ensureAuthenticated, function(req, res){
-	res.render('account', { user: req.user });
+        res.render('account', { user: req.user });
 });
 
 app.get('/auth/facebook',
 passport.authenticate('facebook'),
-	function(req, res){
+        function(req, res){
 });
 
 app.get('/auth/facebook/callback',
 passport.authenticate('facebook', { failureRedirect: '/' }),
-	function(req, res) {
- 		res.redirect('/account');
+        function(req, res) {
+                 res.redirect('/account');
 });
 
 app.get('/logout', function(req, res){
-	req.logout();
-	res.redirect('/');
+        req.logout();
+        res.redirect('/');
 });
 
 app.post('/signup', function(req, res){
-	console.log(req.body);	
-	res.redirect('/account');
+        console.log(req.body);        
+        res.redirect('/account');
 });
 
 
@@ -120,6 +120,6 @@ app.listen(1337);
 // test authentication
 function ensureAuthenticated(req, res, next) {
 if (req.isAuthenticated()) { return next(); }
-	res.redirect('/')
+        res.redirect('/')
 }
 

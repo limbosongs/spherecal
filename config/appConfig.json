@@ -1,0 +1,8 @@
+{
+    "directories": {
+        "appDir": "/app",
+        "dataDir": "/data",
+        "publicDir": "/public",
+        "privateDir": "/private"
+    }
+}
