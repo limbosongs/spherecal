@@ -7,7 +7,7 @@ var path = require('path');
 var mongoose = require('mongoose');
 var config = require('./oauth.js')
 var passport = require('passport')
-var User = require('./user.js')
+var User = require('./models/user.js')
 var fbAuth = require('./authentication.js')
 
 mongoose.connect('mongodb://localhost/test', function(err) { if (err) console.log('error occured', err); });
@@ -44,10 +44,6 @@ passport.deserializeUser(function(id, done) {
 // routes
 app.get('/', routes.index);
 
-app.post('/myaction', function(req, res) {
-  console.log('You sent the name "' + req.body.name + '".');
-});
-
 app.get('/api/users', function (req, res){
   return User.find(function (err, users) {
     if (!err) {
@@ -68,12 +64,6 @@ app.get('/api/users/:id', function(req, res){
   });
 });
 
-/*app.post('/api/users/:id', function(req, res){
-   console.log(req);
-   return(res);  
-
-});
-*/
 app.post('/api/users/:id', function (req, res){
   return User.findById(req.params.id, function (err, user) {
     user.name= req.body.name;
