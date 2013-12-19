@@ -1,15 +1,22 @@
 var mongoose = require('mongoose')
 
-var gender = 'male female'.split(' ')
-
 var schema = mongoose.Schema({ 
-	oauthID: 'number', 
-	provider : 'string',
-	name: 'string', 
+	name: 'string',
+	address: 'string',
+	startsTime: 'string',
+	endTime: 'string',
+	time_zone: 'string',
 	location: 'string',
-	gender: { type: 'string', enum: gender }
+	html_url: 'string',
+	rsvp_url: 'string',
+	description: 'string',
+	photoUrl: 'string',
+	active_flag: 'string',
+	invitedUsers: 'string',
+	invitedSpheres: 'string',
+	created_at: 'Date'
 	});
 
-var User = mongoose.model('User', schema);
+var Event = mongoose.model('Event', schema);
 
-module.exports = User;
+module.exports = Event;

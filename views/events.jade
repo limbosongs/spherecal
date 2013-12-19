@@ -1,0 +1,80 @@
+extends layout
+
+block head
+
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(rel='shortcut icon', href='#{pathToAssets}/assets/ico/favicon.png')
+    title Create Event 
+    // Bootstrap core CSS
+    link(href='/css/bootstrap.css', rel='stylesheet')
+    link(href='/css/bootstrap-editable.css', rel='stylesheet')
+
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
+
+    script(src='http://malsup.github.com/jquery.form.js')
+
+
+block body 
+    .container
+      //
+         Main component for a primary marketing message or call to action 
+      .jumbotron
+        h1 Create Event 
+
+        form(name='input', action='/api/Events', method='POST', id='register')
+          fieldset
+            .clearfix
+                label(for='name') Event Name
+                .input
+                    input.xlarge(id='name', name='name',
+                        required, pattern="^[a-z][a-z0-9_]*$",
+                        placeholder='Choose Event Name', size='30')
+            .clearfix
+                label(for='location') location 
+                .input
+                    input.xlarge(id='location', name='location', 
+                        required,
+                        placeholder='Location of Event.', size='30')
+           .clearfix
+                label(for='startTime') Start Date/Time
+                .input
+                    input.xlarge(id='startTime', name='startTime', 
+                        required,
+                        placeholder='Start Time of the Event', size='30')
+            .clearfix
+                label(for='endTime') End Date/Time
+                .input
+                    input.xlarge(id='endTime', name='endTime', 
+                        required,
+                        placeholder='End time of the event', size='30')
+            .clearfix
+                label(for='description') Description
+                .input
+                    input.xlarge(id='description', name='description', 
+                        required,
+                        placeholder='Description of the event', size='30')
+            .clearfix
+                label(for='invitedSpheres') Invited Spheres
+                .input
+                    input.xlarge(id='invitedSpheres', name='invitedSpheres',
+                        required,
+                        placeholder='Spheres to invite', size='30')
+            .clearfix
+                label(for='invitedUsers') Invited Users 
+                .input
+                    input.xlarge(id='invitedUsers', name='invitedUsers',
+                        required,
+                        placeholder='Users to invite', size='30')
+            .clearfix
+                label(for='photoUrl') Photo Url
+                .input
+                    input.xlarge(id='photoUrl', name='photoUrl',
+                        required,
+                        placeholder='Photo URL for event', size='30')
+            .actions
+                input.btn.primary(type='submit', value='Create Event')
+                | 
+                button.btn(type='reset') Cancel

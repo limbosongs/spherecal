@@ -1,0 +1,72 @@
+extends layout
+
+block head
+
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(rel='shortcut icon', href='#{pathToAssets}/assets/ico/favicon.png')
+    title Create Sphere
+    // Bootstrap core CSS
+    link(href='/css/bootstrap.css', rel='stylesheet')
+    link(href='/css/bootstrap-editable.css', rel='stylesheet')
+
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
+
+    script(src='/js/bootstrap-editable.js')
+
+    script(src='http://malsup.github.com/jquery.form.js')
+
+
+block body 
+    .container
+      //
+         Main component for a primary marketing message or call to action 
+      .jumbotron
+        h1 Create Sphere
+
+        form(name='input', action='/api/spheres', method='POST', id='register')
+          fieldset
+            .clearfix
+                label(for='name') Sphere Name
+                .input
+                    input.xlarge(id='name', name='name',
+                        required, pattern="^[a-z][a-z0-9_]*$",
+                        placeholder='Choose a Sphere name', size='30')
+            .clearfix
+                label(for='description') Description
+                .input
+                    input.xlarge(id='description', name='description', 
+                        required,
+                        placeholder='Tell us about your sphere.', size='30')
+           .clearfix
+                label(for='Location') Location
+                .input
+                    input.xlarge(id='location', name='location', 
+                        required,
+                        placeholder='Where is the Sphere based?', size='30')
+            .clearfix
+                label(for='adminList') Admin List
+                .input
+                    input.xlarge(id='adminList', name='adminList', 
+                        required,
+                        placeholder='List Admins', size='30')
+            .clearfix
+                label(for='userList') User List
+                .input
+                    input.xlarge(id='userList', name='userList', 
+                        required,
+                        placeholder='List Users', size='30')
+            
+
+            .clearfix
+                label(for='type') Sphere Type
+                .input
+                    input.xlarge(id='type', name='type',
+                        required,
+                        placeholder='What is the sphere type?', size='30')
+            .actions
+                input.btn.primary(type='submit', value='Create Sphere')
+                | 
+                button.btn(type='reset') Cancel

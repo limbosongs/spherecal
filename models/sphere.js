@@ -3,11 +3,11 @@ var mongoose = require('mongoose')
 var schema = mongoose.Schema({ 
 	name: 'string', 
 	creator: 'string',
-	mod_list: [{},{}], 
-	admin_list: '',
-	user_list: '',
-	desc: 'string',
+	adminList: 'string',
+	userList: 'string',
+	description: 'string',
 	location: 'string',
+	type: 'string',	
 	createdDate: 'date'
 	});
 
